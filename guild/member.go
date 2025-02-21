@@ -17,11 +17,16 @@ type Member struct {
 
 // SetName updates the name of the member as known on this guild (server).
 func (member *Member) SetName(userName string, displayName string) *Member {
+	log.Trace("--> guild.Member.SetName")
+	defer log.Trace("<-- guild.Member.SetName")
+
 	if displayName != "" {
 		member.Name = displayName
 	} else {
 		member.Name = userName
 	}
+	log.WithField("member", member.MemberID).Info("set member name")
+
 	writeMember(member)
 	return member
 }

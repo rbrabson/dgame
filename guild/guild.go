@@ -19,7 +19,7 @@ func GetGuild(guildID string) *Guild {
 	guild := &Guild{
 		GuildID: guildID,
 	}
-	log.WithFields(log.Fields{"guild": guild.GuildID}).Info("create new guild")
+	log.WithFields(log.Fields{"guild": guild.GuildID}).Debug("get guild")
 	return guild
 }
 

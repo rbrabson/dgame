@@ -29,7 +29,10 @@ func (account *Account) Deposit(amt int) error {
 	account.CurrentBalance += amt
 	account.MonthlyBalance += amt
 	account.LifetimeBalance += amt
-	return writeAccount(account)
+
+	err := writeAccount(account)
+	log.WithFields(log.Fields{"guild": account.GuildID, "member": account.MemberID, "balance": account.CurrentBalance, "amount": amt}).Info("deposit into account")
+	return err
 }
 
 // Withdraw deducts the amount from the balance of the account
@@ -45,7 +48,9 @@ func (account *Account) Withdraw(amt int) error {
 	account.MonthlyBalance -= amt
 	account.LifetimeBalance -= amt
 
-	return writeAccount(account)
+	err := writeAccount(account)
+	log.WithFields(log.Fields{"guild": account.GuildID, "member": account.MemberID, "balance": account.CurrentBalance, "amount": amt}).Info("withdraw from account")
+	return err
 }
 
 // SetBalance sets the account's balance to the specified amount. This is typically used
@@ -56,7 +61,9 @@ func (account *Account) SetBalance(balance int) error {
 
 	account.CurrentBalance = balance
 
-	return writeAccount(account)
+	err := writeAccount(account)
+	log.WithFields(log.Fields{"guild": account.GuildID, "member": account.MemberID, "balance": account.CurrentBalance}).Info("set account balance")
+	return err
 }
 
 // newAccount creates a new bank account for a member in the guild (server).
