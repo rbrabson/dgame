@@ -12,7 +12,7 @@ import (
 
 var (
 	from_dir *os.File
-	to_dir   *os.File
+	// to_dir   *os.File
 )
 
 // setLogLevel sets the logging level. If the LOG_LEVEL environment variable isn't set or the value
@@ -52,10 +52,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	to_dir, err = os.Open(args[1])
-	if err != nil {
-		log.Fatal(err)
-	}
+	// to_dir, err = os.Open(args[1])
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	files, err := listFiles(from_dir)
 	if err != nil {
